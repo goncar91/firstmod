@@ -1,5 +1,8 @@
 {
   "itemGroup.firstmod": "First Mod Items 1",
+  "itemGroup.tabcreaciones": "Mis creaciones",
 
-  "item.firstmod.smile": "Smiley Face 1"
+  "item.firstmod.smile": "Smiley Face 1",
+
+  "item.firstmod.teletransportador": "Teletransportador"
 }
