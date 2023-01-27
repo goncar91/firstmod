@@ -1,8 +1,14 @@
 package com.minecraftspain.firstmod.init;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.minecraftspain.firstmod.FirstMod;
+import com.minecraftspain.firstmod.util.KeyboardHelper;
 import com.mojang.math.Vector3d;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -12,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -33,7 +40,7 @@ public class ItemInit {
 
     // Teleport
     public static final RegistryObject<Item> TELEPORT_STAFF = ITEMS.register("teletransportador",
-            () -> new TeleportStaff(new Item.Properties().tab(instance)));
+            () -> new TeleportStaff(new Item.Properties().tab(instance).durability(50)));
 
 
 
@@ -43,6 +50,15 @@ public class ItemInit {
             super(properties);
         }
 
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+        	if (KeyboardHelper.isHoldingShift()){
+        		tooltip.add(Component.literal("Teleporta donde miras"));
+        	}
+
+            super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        }
+        
         @Override
         public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
             System.out.println("Estamos pulsando el boton derecho");
@@ -55,6 +71,9 @@ public class ItemInit {
             player.fallDistance = 0F;
             world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
 
+            ItemStack stack = player.getItemInHand(hand);
+            stack.setDamageValue(stack.getDamageValue() + 1);
+            if (stack.getDamageValue() >= stack.getMaxDamage()) stack.setCount(0);
 
 
             return super.use(world, player, hand);
