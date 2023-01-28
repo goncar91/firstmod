@@ -42,6 +42,10 @@ public class ItemInit {
     public static final RegistryObject<Item> TELEPORT_STAFF = ITEMS.register("teletransportador",
             () -> new TeleportStaff(new Item.Properties().tab(instance).durability(50)));
 
+    public static final RegistryObject<Item> SUSTITUTO = ITEMS.register("sustituto",
+            () -> new Item1.Sustitute(new Item.Properties().tab(instance)));
+    public static final RegistryObject<Item> VENENO = ITEMS.register("veneno",
+            () -> new Item1.Veneno(new Item.Properties().tab(instance)));
 
 
 
@@ -58,7 +62,7 @@ public class ItemInit {
 
             super.appendHoverText(stack, worldIn, tooltip, flagIn);
         }
-        
+
         @Override
         public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
             System.out.println("Estamos pulsando el boton derecho");
