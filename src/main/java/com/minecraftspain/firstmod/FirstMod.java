@@ -1,5 +1,6 @@
 package com.minecraftspain.firstmod;
 
+import com.minecraftspain.firstmod.init.BlockInit;
 import com.minecraftspain.firstmod.init.ItemInit;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -54,6 +55,9 @@ public class FirstMod
 
 
         ItemInit.ITEMS.register(modEventBus);
+
+        BlockInit.BLOCKS.register(modEventBus);
+
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
