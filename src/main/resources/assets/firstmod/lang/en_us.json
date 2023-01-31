@@ -4,5 +4,8 @@
 
   "item.firstmod.smile": "Smiley Face 1",
 
-  "item.firstmod.teletransportador": "Teletransportador"
+  "item.firstmod.teletransportador": "Teletransportador",
+  "block.firstmod.smile_block": "Smiley Block"
+
+
 }
